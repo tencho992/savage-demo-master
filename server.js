@@ -53,8 +53,7 @@ app.put('/messages', (req, res) => {
   })
 
 })
-
-app.put('/messages/thumbDown', (req, res) => {
+app.put('/messages/:thumbDown', (req, res) => {
   db.collection('messages')
   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
     $set: {
@@ -67,8 +66,8 @@ app.put('/messages/thumbDown', (req, res) => {
     if (err) return res.send(err)
     res.send(result)
   })
-})
 
+})
 app.delete('/messages', (req, res) => {
   db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
     if (err) return res.send(500, err)
